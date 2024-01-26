@@ -10,16 +10,15 @@ name: Java CI with Maven
 
 on: # events que vous allez déclencher 
   push: # a chaque fois que tu vas faire un push
-    branches: [ "main" ]
+    branches:
+       - main
 permissions:
   contents: read  # permet de lire le dépot
   checks: write # permet d'écrire 
   
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3 # utilise l'action checkout pour récupérer le code source de GitHub (prépare le terrain)
     - name: Set up JDK 19  # juste le nom de l'étape
@@ -30,5 +29,11 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Upload target folfer report
+      uses : actions/upload-artifact@v2
+      with: 
+       name: rapport de tests
+       path : ${{ github.workspace }}/reports
+      
 
 
