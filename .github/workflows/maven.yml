@@ -29,12 +29,20 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Upload target folfer report
+    - name: Upload target folder report
       uses : actions/upload-artifact@v2
       with: 
        name: rapport de tests
        path : ${{ github.workspace }}/target
         #  ${{ github.workspace }}/reports
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+          name: JEST Tests            # Name of the check run which will be created
+          path: reports/jest-*.xml    # Path to test results
+          reporter: jest-junit        # Format of test results   
       
 
 
