@@ -11,7 +11,10 @@ name: Java CI with Maven
 on: # events que vous allez déclencher 
   push: # a chaque fois que tu vas faire un push
     branches: [ "main" ]
-
+permissions:
+  contents: read  # permet de lire le dépot
+  checks: write # permet d'écrire 
+  
 jobs:
   build:
 
