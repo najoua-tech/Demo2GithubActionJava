@@ -33,7 +33,9 @@ jobs:
       uses : actions/upload-artifact@v2
       with: 
        name: rapport de tests
-       path : ${{ github.workspace }}/target/reports
+       path : |
+        ${{ github.workspace }}/target
+        ${{ github.workspace }}/reports
       
 
 
